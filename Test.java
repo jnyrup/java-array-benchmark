@@ -128,14 +128,14 @@ final public class Test {
 
 	/********** ArrayList<Integer *******/
 	/**** single */
-	private static final long arrayListSingleInteger(final ArrayList<Integer> arr) {
+	private static final long arrayListIntegerSingleInteger(final ArrayList<Integer> arr) {
 		Integer total = 0;
 		for (int i = 0; i < singleSize; ++i)
 			total += arr.get(i);
 		return (long) total;
 	}
 
-	private static final long arrayListSingleInt(final ArrayList<Integer> arr) {
+	private static final long arrayListIntegerSingleInt(final ArrayList<Integer> arr) {
 		int total = 0;
 		for (int i = 0; i < singleSize; ++i)
 			total += arr.get(i);
@@ -143,14 +143,14 @@ final public class Test {
 	}
 
 	/********** foreach */
-	private static final long arrayListSingleIntegerForeach(final ArrayList<Integer> arr) {
+	private static final long arrayListIntegerSingleIntegerForeach(final ArrayList<Integer> arr) {
 		Integer total = 0;
 		for (Integer a : arr)
 			total += a;
 		return (long) total;
 	}
 
-	private static final long arrayListSingleintForeach(final ArrayList<Integer> arr) {
+	private static final long arrayListIntegerSingleintForeach(final ArrayList<Integer> arr) {
 		int total = 0;
 		for (Integer a : arr)
 			total += a;
@@ -158,7 +158,7 @@ final public class Test {
 	}
 
 	/**** multi */
-	private static final long arrayListMultiInteger(final ArrayList<ArrayList<Integer>> arr) {
+	private static final long arrayListIntegerMultiInteger(final ArrayList<ArrayList<Integer>> arr) {
 		Integer total = 0;
 		for (int i = 0; i < multiSize; ++i)
 			for (int j = 0; j < multiSize; ++j)
@@ -166,7 +166,7 @@ final public class Test {
 		return (long) total;
 	}
 
-	private static final long arrayListMultiInt(final ArrayList<ArrayList<Integer>> arr) {
+	private static final long arrayListIntegerMultiInt(final ArrayList<ArrayList<Integer>> arr) {
 		int total = 0;
 		for (int i = 0; i < multiSize; ++i)
 			for (int j = 0; j < multiSize; ++j)
@@ -174,7 +174,7 @@ final public class Test {
 		return (long) total;
 	}
 
-	private static final long arrayListMultiIntTemp(final ArrayList<ArrayList<Integer>> arr) {
+	private static final long arrayListIntegerMultiIntTemp(final ArrayList<ArrayList<Integer>> arr) {
 		int total = 0;
 		for (int i = 0; i < multiSize; ++i) {
 			final ArrayList<Integer> b = arr.get(i);
@@ -185,7 +185,7 @@ final public class Test {
 	}
 
 	/********** foreach */
-	private static final long arrayListMultiIntegerForeach(final ArrayList<ArrayList<Integer>> arr) {
+	private static final long arrayListIntegerMultiIntegerForeach(final ArrayList<ArrayList<Integer>> arr) {
 		Integer total = 0;
 		for (ArrayList<Integer> a : arr)
 			for (Integer b : a)
@@ -193,10 +193,85 @@ final public class Test {
 		return (long) total;
 	}
 
-	private static final long arrayListMultiIntForeach(final ArrayList<ArrayList<Integer>> arr) {
+	private static final long arrayListIntegerMultiIntForeach(final ArrayList<ArrayList<Integer>> arr) {
 		int total = 0;
 		for (ArrayList<Integer> a : arr)
 			for (Integer b : a)
+				total += b;
+		return (long) total;
+	}
+	
+	/********** ArrayList<Short *******/
+	/**** single */
+	private static final long arrayListShortSingleShort(final ArrayList<Short> arr) {
+		Short total = 0;
+		for (int i = 0; i < singleSize; ++i)
+			total = Short.valueOf((short)(total + arr.get(i)));
+		return (long) total;
+	}
+
+	private static final long arrayListShortSingleInt(final ArrayList<Short> arr) {
+		int total = 0;
+		for (int i = 0; i < singleSize; ++i)
+			total += arr.get(i);
+		return (long) total;
+	}
+
+	/********** foreach */
+	private static final long arrayListShortSingleShortForeach(final ArrayList<Short> arr) {
+		Short total = 0;
+		for (Short a : arr)
+			total = Short.valueOf((short)(total + a));
+		return (long) total;
+	}
+
+	private static final long arrayListShortSingleintForeach(final ArrayList<Short> arr) {
+		int total = 0;
+		for (Short a : arr)
+			total += a;
+		return (long) total;
+	}
+
+	/**** multi */
+	private static final long arrayListShortMultiShort(final ArrayList<ArrayList<Short>> arr) {
+		Short total = 0;
+		for (int i = 0; i < multiSize; ++i)
+			for (int j = 0; j < multiSize; ++j)
+				total = Short.valueOf((short)(total + arr.get(i).get(j)));
+		return (long) total;
+	}
+
+	private static final long arrayListShortMultiInt(final ArrayList<ArrayList<Short>> arr) {
+		int total = 0;
+		for (int i = 0; i < multiSize; ++i)
+			for (int j = 0; j < multiSize; ++j)
+				total += arr.get(i).get(j);
+		return (long) total;
+	}
+
+	private static final long arrayListShortMultiIntTemp(final ArrayList<ArrayList<Short>> arr) {
+		int total = 0;
+		for (int i = 0; i < multiSize; ++i) {
+			final ArrayList<Short> b = arr.get(i);
+			for (int j = 0; j < multiSize; ++j)
+				total += b.get(j);
+		}
+		return (long) total;
+	}
+
+	/********** foreach */
+	private static final long arrayListShortMultiShortForeach(final ArrayList<ArrayList<Short>> arr) {
+		Short total = 0;
+		for (ArrayList<Short> a : arr)
+			for (Short b : a)
+				total = Short.valueOf((short)(total + b));
+		return (long) total;
+	}
+
+	private static final long arrayListShortMultiIntForeach(final ArrayList<ArrayList<Short>> arr) {
+		int total = 0;
+		for (ArrayList<Short> a : arr)
+			for (Short b : a)
 				total += b;
 		return (long) total;
 	}
@@ -378,35 +453,75 @@ final public class Test {
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListMultiInteger(arrMulti2);
+			total = arrayListIntegerMultiInteger(arrMulti2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListMultiInteger"));
+		container.add(new Container(time / iterations, "arrayListIntegerMultiInteger"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListMultiInt(arrMulti2);
+			total = arrayListIntegerMultiInt(arrMulti2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListMultiInt"));
+		container.add(new Container(time / iterations, "arrayListIntegerMultiInt"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListMultiIntTemp(arrMulti2);
+			total = arrayListIntegerMultiIntTemp(arrMulti2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListMultiIntTemp"));
+		container.add(new Container(time / iterations, "arrayListIntegerMultiIntTemp"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListMultiIntegerForeach(arrMulti2);
+			total = arrayListIntegerMultiIntegerForeach(arrMulti2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListMultiIntegerForeach"));
+		container.add(new Container(time / iterations, "arrayListIntegerMultiIntegerForeach"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListMultiIntForeach(arrMulti2);
+			total = arrayListIntegerMultiIntForeach(arrMulti2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListMultiIntForeach"));
+		container.add(new Container(time / iterations, "arrayListIntegerMultiIntForeach"));
 
 		arrMulti2 = null;
+		System.gc();
+		/**********************************************/
+		ArrayList<ArrayList<Short>> arrMulti3 = new ArrayList<ArrayList<Short>>(multiSize);
+		for (int i = 0; i < multiSize; i++) {
+			arrMulti3.add(i, new ArrayList<Short>(multiSize));
+			for (int j = 0; j < multiSize; j++)
+				arrMulti3.get(i).add(j, (short) r.nextInt(Short.MAX_VALUE + 1));
+		}
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortMultiShort(arrMulti3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortMultiShort"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortMultiInt(arrMulti3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortMultiInt"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortMultiIntTemp(arrMulti3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortMultiIntTemp"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortMultiShortForeach(arrMulti3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortMultiShortForeach"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortMultiIntForeach(arrMulti3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortMultiIntForeach"));
+
+		arrMulti3 = null;
 		System.gc();
 		/**********************************************/
 		ArrayList<ArrayList<MutableInt>> arrMultiMutable2 = new ArrayList<ArrayList<MutableInt>>(multiSize);
@@ -481,33 +596,64 @@ final public class Test {
 		arrSingleMutable2 = null;
 		System.gc();
 		/**********************************************/
+		ArrayList<Short> arrSingle3 = new ArrayList<Short>(singleSize);
+		for (int i = 0; i < singleSize; i++)
+			arrSingle3.add(i, (short) r.nextInt(Short.MAX_VALUE + 1));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortSingleShort(arrSingle3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortSingleShort"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortSingleInt(arrSingle3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortSingleInt"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortSingleShortForeach(arrSingle3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortSingleShortForeach"));
+
+		time = System.nanoTime();
+		for (int i = 0; i < iterations; i++)
+			total = arrayListShortSingleintForeach(arrSingle3);
+		time = System.nanoTime() - time;
+		container.add(new Container(time / iterations, "arrayListShortSingleintForeach"));
+
+		arrSingle3 = null;
+		System.gc();
+		/**********************************************/
 		ArrayList<Integer> arrSingle2 = new ArrayList<Integer>(singleSize);
 		for (int i = 0; i < singleSize; i++)
 			arrSingle2.add(i, r.nextInt());
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListSingleInteger(arrSingle2);
+			total = arrayListIntegerSingleInteger(arrSingle2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListSingleInteger"));
+		container.add(new Container(time / iterations, "arrayListIntegerSingleInteger"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListSingleInt(arrSingle2);
+			total = arrayListIntegerSingleInt(arrSingle2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListSingleInt"));
+		container.add(new Container(time / iterations, "arrayListIntegerSingleInt"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListSingleIntegerForeach(arrSingle2);
+			total = arrayListIntegerSingleIntegerForeach(arrSingle2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListSingleIntegerForeach"));
+		container.add(new Container(time / iterations, "arrayListIntegerSingleIntegerForeach"));
 
 		time = System.nanoTime();
 		for (int i = 0; i < iterations; i++)
-			total = arrayListSingleintForeach(arrSingle2);
+			total = arrayListIntegerSingleintForeach(arrSingle2);
 		time = System.nanoTime() - time;
-		container.add(new Container(time / iterations, "arrayListSingleintForeach"));
+		container.add(new Container(time / iterations, "arrayListIntegerSingleintForeach"));
 
 		arrSingle2 = null;
 		System.gc();
